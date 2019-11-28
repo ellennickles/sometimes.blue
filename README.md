@@ -1,4 +1,3 @@
 # sometimes.blue
-A timepiece
 
-[Visit](https://sometimes.blue/)
+🕑 [Visit](https://sometimes.blue/) 
