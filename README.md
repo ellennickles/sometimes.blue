@@ -1,3 +1,3 @@
 # sometimes.blue
 
-🕑 [Visit](https://sometimes.blue/) 
+[visit](https://sometimes.blue/) 
