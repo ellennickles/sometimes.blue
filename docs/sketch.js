@@ -4,7 +4,7 @@
 // ellennickles.site
 
 // References:
-// Processing Community Day 2019: https://processing.nyc/2019/
+// Processing Community Day NYC 2019: https://processing.nyc/2019/
 // Arielle Hein: https://www.youtube.com/watch?v=SzSVIJERQQg
 
 let body;
@@ -31,8 +31,7 @@ function setup() {
   canvas.style('display', 'block');
   body = select('body');
 
-  let hue = random(0,360);
-  firstColor.h = map(hue, 0, 360, 0, 60);
+  firstColor.h = random(0, 360);
   secondColor.h = firstColor.h + difference;
 }
 
@@ -42,8 +41,8 @@ function draw() {
 
   let styleString = `linear-gradient(${gradientDir}deg, ${firstColorString} 0%, ${secondColorString})`;
   
-  if (millis() - timer > 60000) {
-    if (firstColor.h === 60) {
+  if (millis() - timer > 10000) {
+    if (firstColor.h === 361) {
       firstColor.h = 0
       secondColor.h = firstColor.h + difference;
     } else {
