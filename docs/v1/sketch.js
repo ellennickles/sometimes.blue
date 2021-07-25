@@ -1,11 +1,13 @@
-// sometimes.blue
-// A timepiece
-// Ellen Nickles
-// ellennickles.site
+/*
+sometimes.blue v1
+A timepiece 2019
+Ellen Nickles
+ellen.town
 
-// References:
-// Processing Community Day NYC 2019: https://processing.nyc/2019/
-// Arielle Hein: https://www.youtube.com/watch?v=SzSVIJERQQg
+References:
+Processing Community Day NYC 2019: https://processing.nyc/2019/
+Arielle Hein: https://www.youtube.com/watch?v=SzSVIJERQQg
+*/
 
 let body;
 let timer = 0;
