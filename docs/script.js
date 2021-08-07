@@ -8,7 +8,7 @@ ellen.town
 let myColors = [
     {
       num: "0",
-      color: "white",
+      color: "ghostwhite",
     },
     {
       num: "1",
