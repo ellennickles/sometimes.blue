@@ -97,26 +97,6 @@ function createDisplay() {
     }
 }
 
-// solid bars
-// function createDisplay() {
-//   let digits = getCurrentTime();
-
-//   let parent = document.querySelector('.grid-container');
-//   while (parent.firstChild) {
-//     parent.removeChild(parent.firstChild); 
-//   }
-
-//   for (let i = 0; i < digits.length; i++) {
-//     const panel = document.createElement('div');
-
-//       for (let n = 0; n < myColors.length; n++) {
-//           if (digits[i] === myColors[n].num) {
-//             panel.style.backgroundColor = `${myColors[n].color}`;
-//           }
-//       }
-//     parent.appendChild(panel);
-//   } 
-// }
 
 window.onload = () => {
     const container = document.createElement('div');
