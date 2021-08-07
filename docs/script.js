@@ -12,7 +12,7 @@ let myColors = [
     },
     {
       num: "1",
-      color: "cornsilk",
+      color: "ivory",
     },
     {
       num: "2",
