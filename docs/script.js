@@ -28,7 +28,7 @@ let myColors = [
     },
     {
       num: "5",
-      color: "darkorchid",
+      color: "blueviolet",
     },
     {
       num: "6",
