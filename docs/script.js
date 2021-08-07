@@ -12,7 +12,7 @@ let myColors = [
     },
     {
       num: "1",
-      color: "cornsilk",
+      color: "ivory",
     },
     {
       num: "2",
@@ -28,7 +28,7 @@ let myColors = [
     },
     {
       num: "5",
-      color: "darkviolet",
+      color: "darkorchid",
     },
     {
       num: "6",
@@ -44,7 +44,7 @@ let myColors = [
     },
     {
       num: "9",
-      color: "darkred",
+      color: "crimson",
     },
   ];
 
