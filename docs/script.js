@@ -5,7 +5,7 @@ Ellen Nickles
 ellen.town
 */
 
-let myColors = [
+const myColors = [
     {
       num: "0",
       color: "ghostwhite",
@@ -50,8 +50,8 @@ let myColors = [
 
   
 function getCurrentTime() {
-    let day = new Date();
-    let time = day.toLocaleTimeString('en-US');
+    const day = new Date();
+    const time = day.toLocaleTimeString('en-US');
     let digits = time.match(/\d+/g);
     digits = digits.join("");
  
@@ -64,7 +64,7 @@ function getCurrentTime() {
 
 
 function getColors() {
-  let numbers = getCurrentTime();
+  const numbers = getCurrentTime();
   let colors = [];
   for (let i = 0; i < numbers.length; i++) {
     for (let c = 0; c < myColors.length; c++) {
@@ -78,7 +78,7 @@ function getColors() {
 
 // gradient wip
 function createDisplay() {
-    let colors = getColors();
+    const colors = getColors();
 
     parent = document.querySelector('.grid-container');
     while (parent.firstChild) {
