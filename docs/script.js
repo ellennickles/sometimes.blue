@@ -76,7 +76,6 @@ function getColors() {
   return colors;
 }
 
-// gradient wip
 function createDisplay() {
     const colors = getColors();
 
