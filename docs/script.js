@@ -8,43 +8,43 @@ ellen.town
 const myColors = [
     {
       num: "0",
-      color: "rgba(248, 248, 255, 0.95)", // ghostwhite
+      color: "hsla(240, 100%, 99%, 0.95)", // ghostwhite
     },
     {
       num: "1",
-      color: "rgba(255, 255, 240, 0.95)", // ivory
+      color: "hsla(60, 100%, 97%, 0.95)", // ivory
     },
     {
       num: "2",
-      color: "rgba( 0, 0, 255, 0.95)", // blue
+      color: "hsla(240, 100%, 50%, 0.95)", // blue
     },
     {
       num: "3",
-      color: "rgba(255, 165, 0, 0.95)", // orange
+      color: "hsla(39, 100%, 50%, 0.95)", // orange
     },
     {
       num: "4",
-      color: "rgba( 255, 0, 0, 0.95)", // red
+      color: "hsla(0, 100%, 50%, 0.95)", // red
     },
     {
       num: "5",
-      color: "rgba(138, 43, 226, 0.95)", // blueviolet
+      color: "hsla(271, 76%, 53%, 0.95)", // blueviolet
     },
     {
       num: "6",
-      color: "rgba(255, 0, 255, 0.95)", // magenta
+      color: "hsla(300, 100%, 50%, 0.95)", // magenta
     },
     {
       num: "7",
-      color: "rgba(0, 139, 0, 0.95)", // green4
+      color: "hsla(120, 100%, 27%, 0.95)", // green4
     },
     {
       num: "8",
-      color: "rgba(255, 140, 0, 0.95)", // darkorange
+      color: "hsla(33, 100%, 50%, 0.95)", // darkorange
     },
     {
       num: "9",
-      color: "rgba(220, 20, 60, 0.95)", // crimson
+      color: "hsla(348, 83%, 47%, 0.95)", // crimson
     },
   ];
 
