@@ -80,7 +80,7 @@ function getColors() {
 function createDisplay() {
     const colors = getColors();
 
-    parent = document.querySelector('.grid-container');
+    let parent = document.querySelector('.grid-container');
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
