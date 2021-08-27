@@ -8,47 +8,47 @@ ellen.town
 const myColors = [
     {
       num: "0",
-      color: "ghostwhite",
+      color: "rgba(248, 248, 255, 0.95)", // ghostwhite
     },
     {
       num: "1",
-      color: "ivory",
+      color: "rgba(255, 255, 240, 0.95)", // ivory
     },
     {
       num: "2",
-      color: "blue",
+      color: "rgba( 0, 0, 255, 0.95)", // blue
     },
     {
       num: "3",
-      color: "orange",
+      color: "rgba(255, 165, 0, 0.95)", // orange
     },
     {
       num: "4",
-      color: "red",
+      color: "rgba( 255, 0, 0, 0.95)", // red
     },
     {
       num: "5",
-      color: "blueviolet",
+      color: "rgba(138, 43, 226, 0.95)", // blueviolet
     },
     {
       num: "6",
-      color: "magenta",
+      color: "rgba(255, 0, 255, 0.95)", // magenta
     },
     {
       num: "7",
-      color: "forestgreen",
+      color: "rgba(0, 139, 0, 0.95)", // green4
     },
     {
       num: "8",
-      color: "darkorange",
+      color: "rgba(255, 140, 0, 0.95)", // darkorange
     },
     {
       num: "9",
-      color: "crimson",
+      color: "rgba(220, 20, 60, 0.95)", // crimson
     },
   ];
 
-  
+
 function getCurrentTime() {
     const day = new Date();
     const time = day.toLocaleTimeString('en-US');
@@ -75,6 +75,7 @@ function getColors() {
   }
   return colors;
 }
+
 
 function createDisplay() {
     const colors = getColors();
