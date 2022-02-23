@@ -97,7 +97,6 @@ function createDisplay() {
     }
 }
 
-
 window.onload = () => {
     const container = document.createElement('div');
     container.setAttribute('class', 'grid-container');
