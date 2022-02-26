@@ -77,7 +77,7 @@ function getColors() {
 }
 
 
-function createDisplay() {
+function updateDisplay() {
     const colors = getColors();
 
     let parent = document.querySelector('.grid-container');
@@ -101,7 +101,7 @@ window.onload = () => {
     const container = document.createElement('div');
     container.setAttribute('class', 'grid-container');
     document.body.appendChild(container);
-    createDisplay();
-    setInterval(createDisplay, 500);
+    updateDisplay();
+    setInterval(updateDisplay, 500);
 };
 
