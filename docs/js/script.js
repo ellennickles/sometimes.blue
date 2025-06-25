@@ -1,6 +1,6 @@
 /*
-sometimes.blue v3
-Synaesthetic clock 2022
+sometimes.blue v4
+Synaesthetic clock 2025
 Ellen Nickles
 ellen.town
 */
@@ -18,65 +18,52 @@ const myColors = [
   "hsla(348, 83%, 42%, 0.95)", // 9 crimson
 ];
 
-function getCurrentTime() {
-  const day = new Date();
-  const time = day.toLocaleTimeString('en-US');
-  let digits = time.match(/\d+/g);
-  digits = digits.join("");
-
+function getCurrentTimeDigits() {
+  const time = new Date().toLocaleTimeString('en-US');
+  const digits = time.match(/\d+/g).join('');
   if (digits.length > 5) return digits.substring(0, 4);
   else return digits.substring(0, 3);
 }
 
-function getColors() {
-  const numbers = getCurrentTime();
-  let colors = [];
-  for (let i = 0; i < numbers.length; i++) {
-    for (let c = 0; c < myColors.length; c++) {
-      if (numbers[i] == c) colors[i] = myColors[c];
-    }
+function createPanel(color, gradient) {
+  const panel = document.createElement('div');
+  if (gradient) {
+    panel.style.backgroundImage = gradient;
+  } else {
+    panel.style.background = color;
   }
-  return colors;
+  return panel;
 }
 
-function updateDisplay() {
-  const colors = getColors();
+function getGradient(prevColor, currColor) {
+  const gradientColors = chroma
+    .scale([prevColor, currColor])
+    .mode('oklab')
+    .gamma(4)
+    .colors(6);
+  return `linear-gradient(90deg, ${gradientColors.join(',')} 45%)`;
+}
 
-  let parent = document.querySelector('.grid-container');
-  while (parent.firstChild) parent.removeChild(parent.firstChild);
-
-  for (let i = 0; i < colors.length; i++) {
-    const panel = document.createElement('div');
-
-    if (i === 0) {
-      panel.style.background = `${colors[i]}`;
-
-    } else {
-      const startColor = colors[i - 1];
-      const endColor = colors[i];
-
-      const gradientColors = chroma.scale([`${startColor}`, `${endColor}`])
-        .mode('oklab')
-        .gamma(4)
-        .colors(6);
-
-      let gradientStr = '';
-      for (let j = 0; j < gradientColors.length; j++) {
-        gradientStr += `${gradientColors[j]},`
-      }
-
-      let colorStopsStr = gradientStr.slice(0, -1);
-      panel.style.backgroundImage = `linear-gradient(90deg, ${colorStopsStr} 45%)`;
+function renderPanels() {
+  const container = document.querySelector('.grid-container');
+  container.innerHTML = '';
+  const digits = getCurrentTimeDigits();
+  for (let i = 0; i < digits.length; i++) {
+    const color = myColors[parseInt(digits[i])];
+    let gradient = null;
+    if (i > 0) {
+      const prevColor = myColors[parseInt(digits[i - 1])];
+      gradient = getGradient(prevColor, color);
     }
-
-    parent.appendChild(panel);
+    const panel = createPanel(color, gradient);
+    container.appendChild(panel);
   }
 }
 
 window.onload = () => {
   const container = document.createElement('div');
-  container.setAttribute('class', 'grid-container');
+  container.className = 'grid-container';
   document.body.appendChild(container);
-  updateDisplay();
-  setInterval(updateDisplay, 500);
+  renderPanels();
+  setInterval(renderPanels, 500);
 };
