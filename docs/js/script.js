@@ -35,13 +35,25 @@ function createPanel(color, gradient) {
   return panel;
 }
 
-function getGradient(prevColor, currColor) {
+const GRADIENT_END = 45;
+// The last panel has no neighbor to bleed into, so its solid color block
+// reads narrower than the other digits. Shifting its gradient earlier widens
+// that block. Tune this value: higher = wider last block (max ~GRADIENT_END).
+const LAST_PANEL_SHIFT = 18;
+
+function getGradient(prevColor, currColor, isLast) {
   const gradientColors = chroma
     .scale([prevColor, currColor])
     .mode('oklab')
     .gamma(4)
     .colors(6);
-  return `linear-gradient(90deg, ${gradientColors.join(',')} 45%)`;
+  const shift = isLast ? LAST_PANEL_SHIFT : 0;
+  const stops = gradientColors.map((c, idx) => {
+    if (idx === 0) return `${c} ${-shift}%`;
+    if (idx === gradientColors.length - 1) return `${c} ${GRADIENT_END - shift}%`;
+    return c;
+  });
+  return `linear-gradient(90deg, ${stops.join(',')})`;
 }
 
 function renderPanels() {
@@ -53,7 +65,7 @@ function renderPanels() {
     let gradient = null;
     if (i > 0) {
       const prevColor = myColors[parseInt(digits[i - 1])];
-      gradient = getGradient(prevColor, color);
+      gradient = getGradient(prevColor, color, i === digits.length - 1);
     }
     const panel = createPanel(color, gradient);
     container.appendChild(panel);
