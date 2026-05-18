@@ -1,8 +1,7 @@
 /*
-sometimes.blue v4
-Synaesthetic clock 2025
+sometimes.blue v5
+Synaesthetic clock 2026
 Ellen Nickles
-ellen.town
 */
 
 const myColors = [
