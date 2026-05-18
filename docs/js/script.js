@@ -24,57 +24,53 @@ function getCurrentTimeDigits() {
   else return digits.substring(0, 3);
 }
 
-function createPanel(color, gradient) {
-  const panel = document.createElement('div');
-  if (gradient) {
-    panel.style.backgroundImage = gradient;
-  } else {
-    panel.style.background = color;
-  }
-  return panel;
-}
-
 const GRADIENT_END = 45;
-// The last panel has no neighbor to bleed into, so its solid color block
-// reads narrower than the other digits. Shifting its gradient earlier widens
-// that block. Tune this value: higher = wider last block (max ~GRADIENT_END).
-const LAST_PANEL_SHIFT = 18;
+// The last digit has no neighbor to bleed into, so its solid color block
+// reads narrower than the other digits. Shifting its transition earlier
+// widens that block. Higher = wider last block (max ~GRADIENT_END).
+const LAST_DIGIT_SHIFT = 18;
 
-function getGradient(prevColor, currColor, isLast) {
-  const gradientColors = chroma
+// chroma-interpolated stops for one digit-to-digit transition, with the
+// first and last color pinned to absolute positions across the full width.
+function transitionStops(prevColor, currColor, startPct, endPct) {
+  const colors = chroma
     .scale([prevColor, currColor])
     .mode('oklab')
     .gamma(4)
     .colors(6);
-  const shift = isLast ? LAST_PANEL_SHIFT : 0;
-  const stops = gradientColors.map((c, idx) => {
-    if (idx === 0) return `${c} ${-shift}%`;
-    if (idx === gradientColors.length - 1) return `${c} ${GRADIENT_END - shift}%`;
+  return colors.map((c, idx) => {
+    if (idx === 0) return `${c} ${startPct.toFixed(3)}%`;
+    if (idx === colors.length - 1) return `${c} ${endPct.toFixed(3)}%`;
     return c;
   });
+}
+
+// One linear-gradient across the whole width: the width is split into equal
+// segments, one per digit, with the color transitions baked in. A single
+// element means no panel boundaries and therefore no sub-pixel seams.
+function buildGradient(digits) {
+  const segment = 100 / digits.length;
+  const stops = [`${myColors[parseInt(digits[0])]} 0%`];
+  for (let i = 1; i < digits.length; i++) {
+    const prevColor = myColors[parseInt(digits[i - 1])];
+    const currColor = myColors[parseInt(digits[i])];
+    const shift = i === digits.length - 1 ? LAST_DIGIT_SHIFT : 0;
+    const start = segment * (i - shift / 100);
+    const end = segment * (i + (GRADIENT_END - shift) / 100);
+    stops.push(...transitionStops(prevColor, currColor, start, end));
+  }
   return `linear-gradient(90deg, ${stops.join(',')})`;
 }
 
-function renderPanels() {
-  const container = document.querySelector('.grid-container');
-  container.innerHTML = '';
-  const digits = getCurrentTimeDigits();
-  for (let i = 0; i < digits.length; i++) {
-    const color = myColors[parseInt(digits[i])];
-    let gradient = null;
-    if (i > 0) {
-      const prevColor = myColors[parseInt(digits[i - 1])];
-      gradient = getGradient(prevColor, color, i === digits.length - 1);
-    }
-    const panel = createPanel(color, gradient);
-    container.appendChild(panel);
-  }
+function render() {
+  const clock = document.querySelector('.clock');
+  clock.style.backgroundImage = buildGradient(getCurrentTimeDigits());
 }
 
 window.onload = () => {
-  const container = document.createElement('div');
-  container.className = 'grid-container';
-  document.body.appendChild(container);
-  renderPanels();
-  setInterval(renderPanels, 500);
+  const clock = document.createElement('div');
+  clock.className = 'clock';
+  document.body.appendChild(clock);
+  render();
+  setInterval(render, 500);
 };
