@@ -29,6 +29,11 @@ const GRADIENT_END = 45;
 // reads narrower than the other digits. Shifting its transition earlier
 // widens that block. Higher = wider last block (max ~GRADIENT_END).
 const LAST_DIGIT_SHIFT = 18;
+// With 4 digits every block should read as an even quarter of the width.
+// The gamma-skewed blend pushes each perceived color boundary right of its
+// segment line, so all transitions shift left by this same amount to pull
+// the boundaries back onto the 25/50/75 quarter marks.
+const FOUR_DIGIT_SHIFT = 37;
 
 // chroma-interpolated stops for one digit-to-digit transition, with the
 // first and last color pinned to absolute positions across the full width.
@@ -54,7 +59,9 @@ function buildGradient(digits) {
   for (let i = 1; i < digits.length; i++) {
     const prevColor = myColors[parseInt(digits[i - 1])];
     const currColor = myColors[parseInt(digits[i])];
-    const shift = i === digits.length - 1 ? LAST_DIGIT_SHIFT : 0;
+    const shift = digits.length === 4
+      ? FOUR_DIGIT_SHIFT
+      : (i === digits.length - 1 ? LAST_DIGIT_SHIFT : 0);
     const start = segment * (i - shift / 100);
     const end = segment * (i + (GRADIENT_END - shift) / 100);
     stops.push(...transitionStops(prevColor, currColor, start, end));
